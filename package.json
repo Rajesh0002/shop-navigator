@@ -1,0 +1,10 @@
+{
+  "name": "shop-navigator",
+  "version": "1.0.0",
+  "description": "Multi-tenant QR-based Store Navigation System",
+  "scripts": {
+    "start": "node backend/server.js",
+    "build": "cd frontend && DISABLE_ESLINT_PLUGIN=true npx react-scripts build",
+    "setup": "cd backend && npm install && cd ../frontend && npm install"
+  }
+}
