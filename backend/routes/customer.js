@@ -9,7 +9,7 @@ router.get('/shop/:id', async (req, res) => {
     try {
         const shopId = req.params.id;
 
-        const [shops] = await db.query('SELECT id, name, type, address, logo FROM shops WHERE id = ?', [shopId]);
+        const [shops] = await db.query('SELECT id, name, type, address, phone, description, opening_hours, google_maps_url, logo FROM shops WHERE id = ?', [shopId]);
         if (shops.length === 0) return res.status(404).json({ error: 'Shop not found' });
 
         const [zones] = await db.query(

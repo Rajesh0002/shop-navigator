@@ -53,15 +53,15 @@ router.get('/:id', adminAuth, resolveWorkerContext, workerShopGuard('id'), async
 // POST /api/shops - Create new shop (admin only)
 router.post('/', adminAuth, resolveWorkerContext, adminOnly, logoUpload.single('logo'), async (req, res) => {
     try {
-        const { name, type, address } = req.body;
+        const { name, type, address, phone, description, opening_hours, google_maps_url } = req.body;
         if (!name) return res.status(400).json({ error: 'Shop name is required' });
 
         const apiKey = 'snk_' + uuidv4().replace(/-/g, '');
         const logo = req.file ? '/uploads/logos/' + req.file.filename : null;
 
         const [result] = await db.query(
-            'INSERT INTO shops (admin_id, name, type, address, logo, api_key) VALUES (?, ?, ?, ?, ?, ?)',
-            [req.adminId, name, type || 'general', address || null, logo, apiKey]
+            'INSERT INTO shops (admin_id, name, type, address, phone, description, opening_hours, google_maps_url, logo, api_key) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [req.adminId, name, type || 'general', address || null, phone || null, description || null, opening_hours || null, google_maps_url || null, logo, apiKey]
         );
 
         res.status(201).json({
@@ -76,7 +76,7 @@ router.post('/', adminAuth, resolveWorkerContext, adminOnly, logoUpload.single('
 // PUT /api/shops/:id - Update shop
 router.put('/:id', adminAuth, resolveWorkerContext, workerShopGuard('id'), logoUpload.single('logo'), async (req, res) => {
     try {
-        const { name, type, address } = req.body;
+        const { name, type, address, phone, description, opening_hours, google_maps_url } = req.body;
         const shopId = req.params.id;
 
         const [existing] = await db.query('SELECT * FROM shops WHERE id = ? AND admin_id = ?', [shopId, req.adminId]);
@@ -85,8 +85,8 @@ router.put('/:id', adminAuth, resolveWorkerContext, workerShopGuard('id'), logoU
         const logo = req.file ? '/uploads/logos/' + req.file.filename : existing[0].logo;
 
         await db.query(
-            'UPDATE shops SET name = ?, type = ?, address = ?, logo = ? WHERE id = ? AND admin_id = ?',
-            [name || existing[0].name, type || existing[0].type, address || existing[0].address, logo, shopId, req.adminId]
+            'UPDATE shops SET name = ?, type = ?, address = ?, phone = ?, description = ?, opening_hours = ?, google_maps_url = ?, logo = ? WHERE id = ? AND admin_id = ?',
+            [name || existing[0].name, type || existing[0].type, address !== undefined ? address : existing[0].address, phone !== undefined ? phone : existing[0].phone, description !== undefined ? description : existing[0].description, opening_hours !== undefined ? opening_hours : existing[0].opening_hours, google_maps_url !== undefined ? google_maps_url : existing[0].google_maps_url, logo, shopId, req.adminId]
         );
 
         res.json({ message: 'Shop updated' });
