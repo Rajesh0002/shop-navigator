@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { FiPlus, FiTrash2, FiChevronRight, FiLogOut, FiShoppingCart, FiShoppingBag, FiPackage, FiTag } from 'react-icons/fi';
+import { FiPlus, FiTrash2, FiChevronRight, FiLogOut, FiShoppingCart, FiShoppingBag, FiPackage, FiTag, FiHelpCircle } from 'react-icons/fi';
 import API from '../utils/api';
 
 const TYPE_COLORS = {
@@ -90,7 +90,10 @@ export default function Dashboard() {
                         <div className="welcome-text">Welcome, {admin.name}{isWorker ? ' (Staff)' : ''}</div>
                     </div>
                 </div>
-                <button className="logout-btn" onClick={logout}><FiLogOut size={14} /> Logout</button>
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                    <a href="/manual.html" target="_blank" rel="noopener noreferrer" className="logout-btn" style={{ textDecoration: 'none' }}><FiHelpCircle size={14} /> Manual</a>
+                    <button className="logout-btn" onClick={logout}><FiLogOut size={14} /> Logout</button>
+                </div>
             </div>
 
             <div className="dash-content">

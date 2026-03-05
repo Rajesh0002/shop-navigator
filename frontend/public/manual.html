@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Navigator - User Manual</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; color: #333; line-height: 1.6; }
+
+        .hero { background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%); color: white; padding: 60px 20px; text-align: center; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        .hero-icon { font-size: 4rem; margin-bottom: 15px; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
+
+        .section { background: white; border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .section h2 { color: #6a1b9a; font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+
+        .role-tabs { display: flex; gap: 12px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
+        .role-tab { padding: 14px 28px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem; border: 2px solid #e0e0e0; background: white; transition: all 0.3s; }
+        .role-tab.active { border-color: #6a1b9a; background: #f3e5f5; color: #6a1b9a; }
+        .role-tab:hover { border-color: #6a1b9a; }
+
+        .role-content { display: none; }
+        .role-content.active { display: block; }
+
+        .steps { counter-reset: step; }
+        .step { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+        .step-num { background: #6a1b9a; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+        .step-content { flex: 1; }
+        .step-content h4 { margin-bottom: 4px; color: #6a1b9a; }
+        .step-content p { color: #666; font-size: 0.95rem; }
+
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 16px; }
+        .feature-card { background: #f8f9fa; border-radius: 12px; padding: 20px; border-left: 4px solid #6a1b9a; }
+        .feature-card .icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .feature-card h4 { margin-bottom: 6px; color: #333; }
+        .feature-card p { font-size: 0.9rem; color: #666; }
+
+        .tip { background: #e8f5e9; border-radius: 10px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #4caf50; }
+        .tip strong { color: #2e7d32; }
+
+        .warning { background: #fff3e0; border-radius: 10px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #ff9800; }
+        .warning strong { color: #e65100; }
+
+        .flow-box { background: #f3e5f5; border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .flow-box h4 { color: #6a1b9a; margin-bottom: 10px; }
+        .flow-arrow { text-align: center; color: #6a1b9a; font-size: 1.5rem; margin: 8px 0; }
+
+        .faq { margin-top: 12px; }
+        .faq-item { border-bottom: 1px solid #eee; padding: 14px 0; }
+        .faq-q { font-weight: 600; color: #333; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-q::after { content: '+'; font-size: 1.3rem; color: #6a1b9a; transition: transform 0.3s; }
+        .faq-q.open::after { content: '-'; }
+        .faq-a { color: #666; font-size: 0.95rem; max-height: 0; overflow: hidden; transition: max-height 0.3s, padding 0.3s; }
+        .faq-a.open { max-height: 200px; padding-top: 10px; }
+
+        .footer { text-align: center; padding: 30px 20px; color: #999; font-size: 0.9rem; }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+            .section { padding: 20px; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-icon">🏪</div>
+    <h1>Shop Navigator Manual</h1>
+    <p>QR-based store navigation to help customers find products easily</p>
+</div>
+
+<div class="container">
+
+    <div class="role-tabs">
+        <div class="role-tab active" onclick="showRole('customer')">🛒 Customer</div>
+        <div class="role-tab" onclick="showRole('admin')">🏢 Shop Admin</div>
+        <div class="role-tab" onclick="showRole('worker')">👤 Worker</div>
+    </div>
+
+    <!-- CUSTOMER SECTION -->
+    <div id="customer" class="role-content active">
+
+        <div class="section">
+            <h2>📱 How to Use Shop Navigator</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h4>Scan the QR Code</h4>
+                        <p>Scan the QR code displayed at the store entrance using your phone camera. This opens the store's navigation page — no app download needed!</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h4>Browse the Store Map</h4>
+                        <p>You'll see an interactive map showing all zones/aisles in the store. Each zone shows its name, icon, and number of products.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h4>Search for Products</h4>
+                        <p>Use the search bar at the top to find any product. The store map will automatically highlight the zone where your product is located.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h4>Filter by Category</h4>
+                        <p>Tap on a category (e.g., Fruits, Dairy, Snacks) to see all products in that category and their locations.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <h4>Locate a Product</h4>
+                        <p>Click "Locate" on any product to highlight its zone on the store map. The map scrolls to show you exactly where to go.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">6</div>
+                    <div class="step-content">
+                        <h4>Build a Shopping List</h4>
+                        <p>Tap "Add to List" on products you want to buy. Your shopping list is organized by store zone for efficient shopping.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🛒 Shopping List Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">📋</div>
+                    <h4>Auto-Grouped by Zone</h4>
+                    <p>Your list is automatically sorted by store zone so you can shop aisle by aisle without backtracking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">✅</div>
+                    <h4>Mark as Found</h4>
+                    <p>Check off items as you pick them up. See your progress bar fill up as you shop.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">💾</div>
+                    <h4>Auto-Saved</h4>
+                    <p>Your shopping list is saved in your browser. Close and reopen — your list is still there.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🧹</div>
+                    <h4>Clear Found Items</h4>
+                    <p>Once done, clear all found items with one tap. Remove individual items by clicking the X button.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🗺️ Store Map Guide</h2>
+            <div class="feature-grid">
+                <div class="feature-card" style="border-left-color: #4caf50;">
+                    <div class="icon">✨</div>
+                    <h4>Highlighted Zone</h4>
+                    <p>When you search or click "Locate", the matching zone lights up on the map.</p>
+                </div>
+                <div class="feature-card" style="border-left-color: #ff9800;">
+                    <div class="icon">👆</div>
+                    <h4>Click a Zone</h4>
+                    <p>Tap any zone to see all products available in that section.</p>
+                </div>
+                <div class="feature-card" style="border-left-color: #2196f3;">
+                    <div class="icon">🏷️</div>
+                    <h4>Product Count</h4>
+                    <p>Each zone shows how many products are in that area.</p>
+                </div>
+                <div class="feature-card" style="border-left-color: #e91e63;">
+                    <div class="icon">🎯</div>
+                    <h4>Offers Banner</h4>
+                    <p>Check the sliding offers banner at the top for current deals and discounts.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔄 Smart Shopping Flows</h2>
+
+            <div class="flow-box">
+                <h4>Flow 1: Find a Specific Product</h4>
+                <p>Search product → See highlighted zone → View details → Locate on map → Add to list</p>
+            </div>
+
+            <div class="flow-box">
+                <h4>Flow 2: Browse by Category</h4>
+                <p>Select category → See all products → Explore zones on map → Add items to list</p>
+            </div>
+
+            <div class="flow-box">
+                <h4>Flow 3: Zone-by-Zone Shopping</h4>
+                <p>Click zone on map → See all products → Add items → Move to next zone</p>
+            </div>
+
+            <div class="tip">
+                <strong>Pro Tip:</strong> Build your shopping list first, then follow the zone-by-zone order to shop efficiently without going back and forth!
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>ℹ️ Store Information</h2>
+            <p>Tap the info button (ℹ) in the header to see:</p>
+            <ul style="margin-top: 10px; padding-left: 20px; color: #666;">
+                <li>Store name and description</li>
+                <li>Phone number (tap to call directly)</li>
+                <li>Address with Google Maps directions link</li>
+                <li>Opening hours for each day of the week</li>
+                <li>Whether the store is currently open or closed</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- ADMIN SECTION -->
+    <div id="admin" class="role-content">
+
+        <div class="section">
+            <h2>🚀 Getting Started as Shop Admin</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h4>Register Your Account</h4>
+                        <p>Go to the login page and register with your name, email, phone, and password.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h4>Create Your Shop</h4>
+                        <p>From the dashboard, create a new shop with name, type (supermarket, textile, electronics, etc.), address, phone, and opening hours.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h4>Add Zones (Store Layout)</h4>
+                        <p>Create zones representing aisles or sections in your store (e.g., "Fresh Produce", "Dairy", "Billing Counter"). Add icons, colors, and descriptions.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h4>Add Categories</h4>
+                        <p>Create product categories (e.g., "Fruits & Vegetables", "Snacks", "Beverages") with icons and colors.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <h4>Add Products</h4>
+                        <p>Add products with name, price, description, photo, and assign them to a zone and category.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">6</div>
+                    <div class="step-content">
+                        <h4>Generate QR Code</h4>
+                        <p>Generate the QR code for your shop and print it. Place it at your store entrance for customers to scan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Dashboard Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">🏪</div>
+                    <h4>Multiple Shops</h4>
+                    <p>Manage multiple stores from a single admin account. Each shop has its own QR code and products.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📦</div>
+                    <h4>Product Management</h4>
+                    <p>Add, edit, delete products. Update prices, stock status, photos, and zone assignments.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🗺️</div>
+                    <h4>Zone Management</h4>
+                    <p>Create and organize store zones/aisles. Each zone can have a photo, description, and grid position.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🎁</div>
+                    <h4>Offers & Deals</h4>
+                    <p>Create promotional offers with discount percentages and date ranges. Customers see these on the store page.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>👥 Worker Management</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h4>Add Workers</h4>
+                        <p>Create worker accounts with name, email, password, and assign them to a specific shop.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h4>Worker Permissions</h4>
+                        <p>Workers can manage products, zones, and categories for their assigned shop only. They cannot create/delete shops or manage other workers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔗 API Integration</h2>
+            <p>Each shop gets a unique API key for external integrations:</p>
+            <ul style="margin-top: 10px; padding-left: 20px; color: #666;">
+                <li>Bulk import products via CSV</li>
+                <li>Update stock status from external systems</li>
+                <li>Sync product data with your POS system</li>
+                <li>Regenerate API key anytime from shop settings</li>
+            </ul>
+            <div class="warning">
+                <strong>Security:</strong> Never share your API key publicly. Regenerate it immediately if compromised.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- WORKER SECTION -->
+    <div id="worker" class="role-content">
+
+        <div class="section">
+            <h2>👤 Worker Guide</h2>
+            <p>As a worker, you can manage products and zones for your assigned shop.</p>
+            <div class="steps" style="margin-top: 16px;">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h4>Login</h4>
+                        <p>Use the email and password provided by your shop admin to log in.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h4>Manage Products</h4>
+                        <p>Add new products, update prices, change stock status (in stock / out of stock), and upload product photos.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h4>Manage Zones</h4>
+                        <p>Update zone names, photos, and descriptions. Rearrange products between zones.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h4>Manage Categories & Offers</h4>
+                        <p>Add/edit categories and create promotional offers for your assigned shop.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="warning">
+                <strong>Note:</strong> Workers can only access their assigned shop. You cannot create new shops, manage other workers, or regenerate API keys.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FAQ -->
+    <div class="section">
+        <h2>❓ Frequently Asked Questions</h2>
+        <div class="faq">
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Do customers need to download an app?</div>
+                <div class="faq-a">No! Customers just scan the QR code and the store navigation opens directly in their phone browser. No app download needed.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Is my shopping list saved?</div>
+                <div class="faq-a">Yes, your shopping list is automatically saved in your browser. It persists even if you close the page. Each store has its own separate list.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Can I manage multiple shops?</div>
+                <div class="faq-a">Yes! Admin accounts can create and manage multiple shops. Each shop gets its own QR code, products, zones, and worker assignments.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">How do I update product prices?</div>
+                <div class="faq-a">Login as admin or worker → Go to Products → Click edit on any product → Update the price and save.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Can I import products in bulk?</div>
+                <div class="faq-a">Yes, use the API integration feature with your shop's API key to bulk import products via CSV or external systems.</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>Shop Navigator &copy; 2026. QR-Based Store Navigation.</p>
+</div>
+
+<script>
+    function showRole(role) {
+        document.querySelectorAll('.role-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.role-tab').forEach(el => el.classList.remove('active'));
+        document.getElementById(role).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    function toggleFaq(el) {
+        el.classList.toggle('open');
+        el.nextElementSibling.classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>

@@ -71,6 +71,9 @@ export default function Register() {
                 <div className="auth-link">
                     Already have an account? <Link to="/login">Login here</Link>
                 </div>
+                <div className="auth-link" style={{ marginTop: 8 }}>
+                    <a href="/manual.html" target="_blank" rel="noopener noreferrer">User Manual</a>
+                </div>
             </div>
         </div>
     );

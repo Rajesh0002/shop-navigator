@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { FiSearch, FiShoppingCart, FiInfo, FiX, FiCheck, FiMapPin, FiPhone, FiClock, FiNavigation, FiPlus, FiTrash2, FiChevronRight, FiPackage } from 'react-icons/fi';
+import { FiSearch, FiShoppingCart, FiInfo, FiX, FiCheck, FiMapPin, FiPhone, FiClock, FiNavigation, FiPlus, FiTrash2, FiChevronRight, FiPackage, FiHelpCircle } from 'react-icons/fi';
 
 const API_BASE = '';
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -421,7 +421,7 @@ export default function CustomerView() {
 
             {/* Footer */}
             <div className="customer-footer">
-                Powered by <a href="/">Shop Navigator</a>
+                Powered by <a href="/">Shop Navigator</a> | <a href="/manual.html" target="_blank" rel="noopener noreferrer"><FiHelpCircle size={12} style={{ verticalAlign: 'middle', marginRight: 2 }} />Help</a>
             </div>
 
             {/* Product Detail Modal */}
